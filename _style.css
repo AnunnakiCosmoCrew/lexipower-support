@@ -1,0 +1,66 @@
+/* Shared styles for LexiPower legal + support pages. */
+:root {
+  --bg: #f7f7fb;
+  --fg: #1a1a2e;
+  --muted: #555;
+  --accent: #4a4e9c;
+  --card: #ffffff;
+  --border: #e5e7eb;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14141c;
+    --fg: #e9e9f2;
+    --muted: #a8a8b8;
+    --accent: #9ea3ff;
+    --card: #1f1f2c;
+    --border: #2c2c3c;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  margin: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 24px 96px;
+}
+header {
+  margin-bottom: 32px;
+}
+h1 { font-size: 1.85rem; margin: 0 0 4px; letter-spacing: -0.01em; }
+.brand { font-weight: 700; color: var(--accent); }
+.effective { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.1rem;
+  margin: 32px 0 8px;
+  letter-spacing: -0.005em;
+}
+p, li { color: var(--fg); margin: 8px 0; }
+.body { white-space: pre-wrap; }
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+}
+a:hover { border-bottom-color: var(--accent); }
+footer {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+nav.top {
+  display: flex;
+  gap: 16px;
+  font-size: 0.92rem;
+  margin-bottom: 24px;
+}
