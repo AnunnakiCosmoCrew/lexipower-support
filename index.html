@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LexiPower — Support</title>
+  <meta name="description" content="Support and help for LexiPower, the personal vocabulary notebook app.">
+  <style>
+    :root {
+      --bg: #f7f7fb;
+      --fg: #1a1a2e;
+      --muted: #555;
+      --accent: #4a4e9c;
+      --card: #ffffff;
+      --border: #e5e7eb;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #14141c;
+        --fg: #e9e9f2;
+        --muted: #a8a8b8;
+        --accent: #9ea3ff;
+        --card: #1f1f2c;
+        --border: #2c2c3c;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      margin: 0;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px 24px 96px;
+    }
+    header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+    .brand {
+      font-weight: 700;
+      color: var(--accent);
+    }
+    h2 {
+      font-size: 1.15rem;
+      margin: 32px 0 8px;
+      letter-spacing: -0.005em;
+    }
+    p, li {
+      color: var(--fg);
+    }
+    .muted { color: var(--muted); font-size: 0.92rem; }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    }
+    a:hover { border-bottom-color: var(--accent); }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 16px 0;
+    }
+    .cta {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 10px 18px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+    }
+    .cta:hover { opacity: 0.92; border-bottom-color: transparent; }
+    ul { padding-left: 1.2rem; }
+    footer {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1><span class="brand">LexiPower</span> · Support</h1>
+      <span class="muted">v1.0</span>
+    </header>
+
+    <p>
+      LexiPower is a personal vocabulary notebook. Save the English words
+      you encounter, get them enriched with definitions, pronunciation, and
+      CEFR level, then learn them through spaced repetition and six quiz
+      modes.
+    </p>
+
+    <div class="card">
+      <h2 style="margin-top: 0">Need help?</h2>
+      <p>Email us — we read every message and reply within two business days.</p>
+      <a class="cta" href="mailto:contact@lexipower.app?subject=LexiPower%20support">
+        Email contact@lexipower.app
+      </a>
+    </div>
+
+    <h2>Common questions</h2>
+
+    <h3>How do I add a word?</h3>
+    <p>
+      Tap the <strong>+ Add Word</strong> button on the home screen, type
+      the word, and tap Save. LexiPower automatically fetches the
+      definition, pronunciation, CEFR level, and an example sentence.
+    </p>
+
+    <h3>How does the quiz schedule work?</h3>
+    <p>
+      Every word follows a spaced-repetition schedule: hard answers come
+      back sooner, easy ones come back later. The Review tile on the home
+      screen shows how many words are due today.
+    </p>
+
+    <h3>My words aren't syncing across devices</h3>
+    <p>
+      Make sure you're signed in with the same account on both devices.
+      Go to <strong>Settings → Data → Refresh from server</strong> to
+      force a full pull from the cloud.
+    </p>
+
+    <h3>How do I export my words?</h3>
+    <p>
+      <strong>Settings → Data → Export my words</strong> downloads a CSV of
+      your full notebook — words, definitions, CEFR levels, notes, and
+      review state.
+    </p>
+
+    <h3>How do I delete my account?</h3>
+    <p>
+      <strong>Settings → Account → Delete account</strong>. This permanently
+      removes your account, every word in your notebook, and your learning
+      progress. The action cannot be undone.
+    </p>
+
+    <h2>Legal</h2>
+    <ul>
+      <li><a href="https://lexipower.app/privacy">Privacy Policy</a></li>
+      <li><a href="https://lexipower.app/terms">Terms of Service</a></li>
+    </ul>
+
+    <footer>
+      © 2026 Mert Ertugrul · LexiPower
+    </footer>
+  </div>
+</body>
+</html>
