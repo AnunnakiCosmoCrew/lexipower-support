@@ -1,0 +1,33 @@
+#!/bin/sh
+# Enforces ADR 0001 (public brand attribution): every page names and links Luvita.
+# Enable with: git config core.hooksPath .githooks
+set -e
+
+pages="index.html privacy.html terms.html"
+entity='Luvita Teknoloji Ltd. Şti.'
+link='https://luvita.tr/'
+fail=0
+
+for page in $pages; do
+    [ -f "$page" ] || continue
+    if ! grep -qF "$entity" "$page" || ! grep -qF "$link" "$page"; then
+        echo "pre-push: $page is missing the Luvita attribution line." >&2
+        fail=1
+    fi
+done
+
+if grep -lF 'Mert Ertugrul' $pages 2>/dev/null | grep -q .; then
+    echo 'pre-push: a personal name appears as the copyright holder.' >&2
+    fail=1
+fi
+
+if [ "$fail" -ne 0 ]; then
+    cat >&2 <<'MSG'
+
+Every page must carry, verbatim:
+  © 2026 CosmoCrew — a brand of <a href="https://luvita.tr/">Luvita Teknoloji Ltd. Şti.</a>
+
+See CLAUDE.md and luvita-docs/adr/0001-public-brand-attribution.md.
+MSG
+    exit 1
+fi

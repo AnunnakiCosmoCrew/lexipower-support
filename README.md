@@ -9,5 +9,17 @@ LexiPower app submission (issue #836 in `WordPower-app`).
 
 ## Editing
 
-`index.html` is a single static page — no build step. Edit, commit, push;
-GitHub Pages redeploys automatically (~1 minute).
+Three static pages — `index.html`, `privacy.html`, `terms.html` — with no build
+step. `privacy.html` and `terms.html` share `_style.css`; `index.html` has its own
+inline `<style>`. Edit, commit, push; GitHub Pages redeploys automatically
+(~1 minute).
+
+Every page must carry the Luvita attribution line in its footer, per
+[ADR 0001](https://github.com/AnunnakiCosmoCrew/luvita-docs/blob/main/adr/0001-public-brand-attribution.md).
+`.githooks/pre-push` checks this — enable it once per clone with:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+See CLAUDE.md for the exact wording and the rules behind it.
