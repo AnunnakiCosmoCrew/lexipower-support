@@ -1,0 +1,30 @@
+name: CI
+
+# The gate for pull requests. These three pages have no build step; the only check is
+# the brand-and-claim check (luvita-docs#9): the Luvita attribution line on every page,
+# the holder never a person or a bare brand, LexiPower never "WordPower". Rules and
+# reasons live in brand-rules.json; the script is vendored from
+# project-templates/actions/brand-claim-check. The same check runs locally as the
+# optional .githooks/pre-push.
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Brand and claim check
+        run: python3 .github/scripts/brand-check.py --rules brand-rules.json

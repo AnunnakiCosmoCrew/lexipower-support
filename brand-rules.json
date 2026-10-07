@@ -1,0 +1,70 @@
+{
+  "$comment": "Brand-and-claim rules for the LexiPower support pages (luvita-docs#9, EmirErs W7). No build step: python3 .github/scripts/brand-check.py. Schema: https://github.com/AnunnakiCosmoCrew/project-templates/tree/main/actions/brand-claim-check",
+  "root": ".",
+  "rules": [
+    {
+      "id": "attribution-line",
+      "kind": "required",
+      "pattern": "(©|&copy;|&#169;)\\s*\\d{4}\\s*CosmoCrew\\s*(—|&mdash;|&#8212;)\\s*a brand of\\s*<a\\s[^>]*href=\"https://luvita\\.tr/\"[^>]*>\\s*Luvita Teknoloji Ltd\\. (Ş|&#350;|&Scedil;)ti\\.\\s*</a>",
+      "paths": [
+        "/*.html"
+      ],
+      "why": "CLAUDE.md / luvita-docs ADR 0001: every page carries, verbatim, `© 2026 CosmoCrew — a brand of <a href=\"https://luvita.tr/\">Luvita Teknoloji Ltd. Şti.</a>`, with the entity as the link text and luvita.tr as the target. This is what a Google for Startups reviewer looked for and did not find (case #00302760)."
+    },
+    {
+      "id": "holder-is-cosmocrew",
+      "kind": "banned",
+      "pattern": "(©|&copy;|&#169;)(?!\\s*(?:\\d{4}\\s*)?CosmoCrew)\\s*\\S*",
+      "paths": [
+        "/*.html"
+      ],
+      "why": "ADR 0001: `© CosmoCrew` leads and is never replaced by `© Luvita`; the holder is never a person (these pages once read `© 2026 Mert Ertugrul · LexiPower`)."
+    },
+    {
+      "id": "no-personal-holder",
+      "kind": "banned",
+      "pattern": "Mert\\s+Ertu[gğ]rul",
+      "paths": [
+        "/*.html"
+      ],
+      "why": "CLAUDE.md: the copyright holder is the company, never a person; do not reintroduce a personal name anywhere, including legal prose."
+    },
+    {
+      "id": "no-attribution-via-cosmocrew",
+      "kind": "banned",
+      "pattern": "a brand of\\s*<a\\s[^>]*href=\"https?://(www\\.)?cosmocrew\\.dev",
+      "paths": [
+        "/*.html"
+      ],
+      "why": "CLAUDE.md: link to luvita.tr directly, never via cosmocrew.dev; one hop is not enough."
+    },
+    {
+      "id": "short-form-only",
+      "kind": "banned",
+      "pattern": "Enerji|ENERJİ",
+      "paths": [
+        "/*.html"
+      ],
+      "why": "CLAUDE.md: short form of the name only; the full registered trade name contains \"Enerji\" and belongs in legal-identity blocks on luvita.tr (luvita-web/adr/0003)."
+    },
+    {
+      "id": "lexipower-not-wordpower",
+      "kind": "banned",
+      "pattern": "WordPower|Word Power",
+      "paths": [
+        "/*.html",
+        "/*.css"
+      ],
+      "why": "LUVITA.md, Brands: the public name is LexiPower, never \"WordPower\" (rule inventory 58). README.md may name the WordPower-app repository; the served pages may not."
+    },
+    {
+      "id": "no-street-address",
+      "kind": "banned",
+      "pattern": "yal[ıi]kent|\\b69\\s*/\\s*25\\b|g[üu]ndo[ğg]an\\s+mah",
+      "paths": [
+        "/*.html"
+      ],
+      "why": "LUVITA.md, Legal entity: the registered office is the founder's home; the street address is never published on our own surfaces (rule inventory 54/118)."
+    }
+  ]
+}
