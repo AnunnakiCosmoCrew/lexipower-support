@@ -5,11 +5,12 @@
     {
       "id": "attribution-line",
       "kind": "required",
-      "pattern": "(©|&copy;|&#169;)\\s*\\d{4}\\s*CosmoCrew\\s*(—|&mdash;|&#8212;)\\s*a brand of\\s*<a\\s[^>]*href=\"https://luvita\\.tr/\"[^>]*>\\s*Luvita Teknoloji Ltd\\. (Ş|&#350;|&Scedil;)ti\\.\\s*</a>",
+      "pattern": "© 20\\d{2} CosmoCrew — a brand of <a href=\"https://luvita\\.tr/\">Luvita Teknoloji Ltd\\. Şti\\.</a>",
       "paths": [
         "/*.html"
       ],
-      "why": "CLAUDE.md / luvita-docs ADR 0001: every page carries, verbatim, `© 2026 CosmoCrew — a brand of <a href=\"https://luvita.tr/\">Luvita Teknoloji Ltd. Şti.</a>`, with the entity as the link text and luvita.tr as the target. This is what a Google for Startups reviewer looked for and did not find (case #00302760)."
+      "why": "CLAUDE.md / luvita-docs ADR 0001: every page carries, verbatim and case-sensitively, `© 2026 CosmoCrew — a brand of <a href=\"https://luvita.tr/\">Luvita Teknoloji Ltd. Şti.</a>` — literal characters (these pages are hand-written UTF-8, no entities), the entity as the link text, luvita.tr as the href and nothing else on the anchor. Only the year moves (ADR 0001: it tracks the current year). This is what a Google for Startups reviewer looked for and did not find (case #00302760).",
+      "flags": ""
     },
     {
       "id": "holder-is-cosmocrew",
