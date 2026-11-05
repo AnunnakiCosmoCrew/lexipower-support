@@ -10,8 +10,7 @@ LexiPower app submission (issue #836 in `WordPower-app`).
 ## Editing
 
 Three static pages — `index.html`, `privacy.html`, `terms.html` — with no build
-step. `privacy.html` and `terms.html` share `_style.css`; `index.html` has its own
-inline `<style>`. Edit, commit, push; GitHub Pages redeploys automatically
+step. All three share `_style.css`; CI runs an axe-core accessibility check on them. Edit, commit, push; GitHub Pages redeploys automatically
 (~1 minute).
 
 Every page must carry the Luvita attribution line in its footer, per
