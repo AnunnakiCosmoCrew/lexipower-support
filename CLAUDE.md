@@ -1,8 +1,7 @@
 # lexipower-support
 
 Public support, privacy and terms pages for **LexiPower**, a CosmoCrew app.
-Three static HTML files, no build step. `privacy.html` and `terms.html` share
-`_style.css`; `index.html` carries its own inline `<style>` block.
+Three static HTML files, no build step, all sharing `_style.css`.
 
 Deployed by **GitHub Pages** from `main` at the repo root, served at
 <https://cosmocrew.dev/lexipower-support/>. That URL is registered as the
@@ -49,3 +48,33 @@ git config core.hooksPath .githooks
 
 Per ADR 0001 this is deliberately a hook and a rule here, not a CI workflow — a
 one-line string per site does not justify a workflow to guard it.
+
+## Accessibility
+
+Per [ADR 0011](https://github.com/AnunnakiCosmoCrew/luvita-docs/blob/main/adr/0011-front-end-platform-and-accessibility-baseline.md) §5.1
+this repo follows the first row of the table: **WCAG 2.2 Level AA** for anything
+rendered in a browser. Every page keeps `lang` on `<html>`, a skip link to
+`<main id="main">`, all content inside landmarks, and the global `:focus-visible`
+style in `_style.css`. Colours come from the variables in `_style.css` only; there
+is no inline `<style>` any more.
+
+- **Automated check:** `.github/a11y/axe-check.mjs` runs axe-core (WCAG 2.0/2.1/2.2
+  A and AA tags plus axe's best-practice rules, which is where a missing `<main>`
+  is caught) on every `*.html` in the repo root, in the `build` job of `ci.yml`.
+  Any violation fails the job. Exceptions go in `.github/a11y/allowlist.json` as
+  `{page, rule, reason}`; an entry with no reason, or one that no longer matches a
+  violation, also fails. Review the list in every PR that grows it.
+- **Run it locally:**
+
+  ```bash
+  cd ~/Projects/lexipower-support
+  mkdir -p /tmp/a11y && npm install --prefix /tmp/a11y puppeteer@24 axe-core@4.11.4
+  NODE_PATH=/tmp/a11y/node_modules node .github/a11y/axe-check.mjs
+  ```
+
+- **Manual pass:** keyboard-only walk of the three pages (Tab shows the skip link
+  first; focus is visible everywhere) plus VoiceOver landmarks rotor. Last pass:
+  **not yet done** (the founder or a reviewer records the date here after the first
+  one). Automation finds roughly half of the issues, so this stays a per-release step.
+- **Required check:** `build` must be listed under the `main-protection` ruleset's
+  required checks (ADR 0011 §5.3).
