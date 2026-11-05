@@ -26,8 +26,10 @@ const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-prac
 const pages = readdirSync(root).filter((f) => f.endsWith('.html')).sort();
 const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
 let failures = 0;
-for (const page of pages) {
+for (const scheme of ['light', 'dark']) for (const page of pages) {
+  const label = `${page} [${scheme}]`;
   const tab = await browser.newPage();
+  await tab.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: scheme }]);
   await tab.goto(pathToFileURL(resolve(root, page)).href);
   await tab.evaluate(axeSource);
   const result = await tab.evaluate(
@@ -38,10 +40,10 @@ for (const page of pages) {
     const idx = allow.findIndex((e) => e.page === page && e.rule === v.id);
     if (idx >= 0) { used.add(idx); continue; }
     failures += 1;
-    console.error(`${page}: ${v.id} (${v.impact}) ${v.help}\n  ${v.helpUrl}`);
+    console.error(`${label}: ${v.id} (${v.impact}) ${v.help}\n  ${v.helpUrl}`);
     for (const n of v.nodes) console.error(`  - ${n.target.join(' ')}`);
   }
-  console.log(`${page}: ${result.violations.length} violation(s), ${result.passes.length} rules passed`);
+  console.log(`${label}: ${result.violations.length} violation(s), ${result.passes.length} rules passed`);
   await tab.close();
 }
 await browser.close();
